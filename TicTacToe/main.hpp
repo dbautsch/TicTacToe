@@ -8,4 +8,6 @@
 
 #include <windows.h>
 
+#include "Game.hpp"
+
 #endif

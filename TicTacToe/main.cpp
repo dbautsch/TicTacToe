@@ -18,5 +18,7 @@ int main
 #endif
 
 {
+	Game g;
 
+	return g.Run();
 }
