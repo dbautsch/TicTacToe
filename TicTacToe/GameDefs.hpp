@@ -10,41 +10,13 @@
 *	THE SOFTWARE.
 */
 
-#ifndef RENDERER_HPP_INCLUDED
-#define RENDERER_HPP_INCLUDED
+#ifndef GAME_DEFS_H_INCLUDED
+#define GAME_DEFS_H_INCLUDED
 
-#include "GameDefs.hpp"
-
-struct SDL_Surface;
-
-class Game;
-
-class Renderer
+enum EGameBoard
 {
-public:
-						Renderer(Game * pGame);
-
-						~Renderer();
-
-	bool				Init();
-
-	void				Redraw();
-
-	void				OnResize(int iW, int iH);
-
-private:
-	SDL_Surface		*	pMainSurface;
-
-	Game			*	pGame;
-
-
-	void				Finish();
-
-	void				DrawBoard();
-
-	void				DrawWelcomeBoard();
-
-	void				DrawGameBoard();
+	EGB_Welcome,	//!<	welcome screen
+	EGB_Game		//!<	a game in progress
 };
 
 #endif

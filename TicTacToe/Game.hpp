@@ -13,7 +13,9 @@
 #ifndef GAME_HPP_INCLUDED
 #define GAME_HPP_INCLUDED
 
-#include "SDL.h"
+#include <SDL.h>
+
+#include "GameDefs.hpp"
 
 class Renderer;
 
@@ -27,10 +29,16 @@ public:
 	int					Run();
 
 private:
+	friend class Renderer;
+
 	Renderer		*	pRenderer;
+
+	EGameBoard			state;
 
 
 	void				StartMessageHandler();
+
+	void				ChangeGameState(EGameBoard state);
 	
 };
 

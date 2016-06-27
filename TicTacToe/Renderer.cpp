@@ -11,12 +11,15 @@
 */
 
 #include "Renderer.hpp"
+#include "Game.hpp"
 
 #include <SDL.h>
 
-Renderer::Renderer()
+Renderer::Renderer(Game * pGame)
 {
 	pMainSurface	= NULL;
+
+	this->pGame		= pGame;
 }
 
 Renderer::~Renderer()
@@ -33,7 +36,7 @@ bool Renderer::Init()
     }
 
 	//	2.) create renderer window
-	pMainSurface	= SDL_SetVideoMode(800, 600, 0, SDL_HWSURFACE);
+	pMainSurface	= SDL_SetVideoMode(800, 600, 0, SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
 
 	if (pMainSurface == NULL)
 	{
@@ -54,4 +57,51 @@ void Renderer::Finish()
 	}
 
 	SDL_Quit();
+}
+
+void Renderer::DrawBoard()
+{
+	/*!
+	*	Draw current board.
+	*/
+
+	switch (pGame->state)
+	{
+	case EGB_Welcome:
+		DrawWelcomeBoard();
+		break;
+
+	case EGB_Game:
+		DrawGameBoard();
+		break;
+	}
+}
+
+void Renderer::Redraw()
+{
+	//!<	force renderer to redraw the entire screen (or window).
+
+	DrawBoard();
+
+	SDL_UpdateRect(pMainSurface, pMainSurface->clip_rect.w, pMainSurface->clip_rect.h, pMainSurface->clip_rect.x, pMainSurface->clip_rect.y);
+	SDL_Flip(pMainSurface);
+}
+
+void Renderer::DrawWelcomeBoard()
+{
+
+}
+
+void Renderer::DrawGameBoard()
+{
+	SDL_Rect rc;
+
+	SDL_GetClipRect(pMainSurface, &rc);
+	SDL_FillRect(pMainSurface, &rc, SDL_MapRGB(pMainSurface->format, 128, 128, 128));
+}
+
+void Renderer::OnResize(int iW, int iH)
+{
+	SDL_SetVideoMode(iW, iH, 0, SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
+	Redraw();
 }

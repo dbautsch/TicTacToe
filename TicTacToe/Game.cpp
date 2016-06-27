@@ -14,6 +14,7 @@
 #include "Renderer.hpp"
 
 #include <windows.h>
+#include <SDL_Events.h>
 
 Game::Game()
 {
@@ -35,7 +36,7 @@ int	Game::Run()
 	if (pRenderer)
 		return 0;
 
-	pRenderer	= new Renderer();
+	pRenderer	= new Renderer(this);
 
 	if (pRenderer->Init() == false)
 	{
@@ -58,8 +59,13 @@ void Game::StartMessageHandler()
 	*	This function would return only at the end of the application.
 	*/
 
+	//	the event queue is updated every 10 msecs, the game should
+	//	run at average 100 fps.
+
 	SDL_Event e;
 	bool bQuitLoop		= false;
+
+	ChangeGameState(EGB_Game);
 
 	while(true)
     {  
@@ -69,6 +75,19 @@ void Game::StartMessageHandler()
 			{  
 				case SDL_KEYDOWN:
 				{
+					break;
+				}
+
+				case SDL_VIDEORESIZE:
+				{
+					pRenderer->OnResize(e.resize.w, e.resize.h);
+					pRenderer->Redraw();
+					break;
+				}
+
+				case SDL_VIDEOEXPOSE:
+				{
+					pRenderer->Redraw();
 					break;
 				}
 
@@ -87,4 +106,11 @@ void Game::StartMessageHandler()
 
 		Sleep(10);
     }
+}l
+
+void Game::ChangeGameState(EGameBoard board)
+{
+	state = board;
+
+	pRenderer->Redraw();
 }

@@ -199,6 +199,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\GameDefs.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\main.hpp"
 				>
 			</File>
