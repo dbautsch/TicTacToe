@@ -106,7 +106,7 @@ void Game::StartMessageHandler()
 
 		Sleep(10);
     }
-}l
+}
 
 void Game::ChangeGameState(EGameBoard board)
 {

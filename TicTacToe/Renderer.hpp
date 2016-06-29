@@ -13,7 +13,10 @@
 #ifndef RENDERER_HPP_INCLUDED
 #define RENDERER_HPP_INCLUDED
 
+#include <vector>
+
 #include "GameDefs.hpp"
+#include "RendererDefs.hpp"
 
 struct SDL_Surface;
 
@@ -37,6 +40,10 @@ private:
 
 	Game			*	pGame;
 
+	ImageList			player1_Pictures;
+
+	ImageList			player2_Pictures;
+
 
 	void				Finish();
 
@@ -45,6 +52,10 @@ private:
 	void				DrawWelcomeBoard();
 
 	void				DrawGameBoard();
+
+	bool				LoadPictures();
+
+	void				UnloadPictures();
 };
 
 #endif

@@ -60,7 +60,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="SDL.lib"
+				AdditionalDependencies="SDL.lib SDL_Image.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -177,7 +177,19 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\Engine.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\EngineHelpers.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Game.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Helpers.cpp"
 				>
 			</File>
 			<File
@@ -195,6 +207,14 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\Engine.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\EngineHelpers.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Game.hpp"
 				>
 			</File>
@@ -203,11 +223,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Helpers.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\main.hpp"
 				>
 			</File>
 			<File
 				RelativePath=".\Renderer.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RendererDefs.hpp"
 				>
 			</File>
 		</Filter>
