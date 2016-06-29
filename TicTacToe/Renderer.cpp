@@ -14,6 +14,8 @@
 #include "Game.hpp"
 #include "EngineHelpers.hpp"
 #include "Helpers.hpp"
+#include "RendererLayout.hpp"
+#include "GameEngine.hpp"
 
 #include <SDL.h>
 #include <string>
@@ -23,7 +25,8 @@ using namespace std;
 
 Renderer::Renderer(Game * pGame)
 {
-	pMainSurface	= NULL;
+    pMainSurface      = NULL;
+    pLayout           = new RendererLayout();
 
 	this->pGame		= pGame;
 }
@@ -31,6 +34,8 @@ Renderer::Renderer(Game * pGame)
 Renderer::~Renderer()
 {
 	Finish();
+
+    delete pLayout;
 }
 
 bool Renderer::Init()
@@ -49,7 +54,7 @@ bool Renderer::Init()
 
 	//	2.) create renderer window
 	pMainSurface	= SDL_SetVideoMode(800, 600, 0, SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
-
+    
 	if (pMainSurface == NULL)
 	{
 		//	SDL has failed to initialize window
@@ -57,6 +62,8 @@ bool Renderer::Init()
 
 		return false;
 	}
+
+    pLayout->WindowResized(800, 600);
 
 	return true;
 }
@@ -113,18 +120,33 @@ void Renderer::DrawGameBoard()
 	SDL_GetClipRect(pMainSurface, &rc);
 	SDL_FillRect(pMainSurface, &rc, SDL_MapRGB(pMainSurface->format, 128, 128, 128));
 
-	DrawBoardSkeleton();
+    DrawBoardSkeleton(pLayout->ClientWidth(), pLayout->ClientHeight());
 }
 
-void Renderer::DrawBoardSkeleton()
+void Renderer::DrawBoardSkeleton(unsigned uClientWidth, unsigned uClientHeight)
 {
 	//!<	draw board skeleton - a plece where X and O will be placed
 	//!<	during the match.
+
+    //  we want the game board to take up to 50% od window width
+    unsigned uGameWidth     = pGame->pGameEngine->Width();
+    double dBoardWidth      = uClientWidth * 0.5;
+    double dSymbolSpacing   = dBoardWidth / uGameWidth;
+
+    for (unsigned iRow = 0; iRow < uGameWidth; ++iRow)
+    {
+        for (unsigned iColumn = 0; iColumn < uGameWidth; ++iColumn)
+        {
+            
+        }
+    }
 }
 
 void Renderer::OnResize(int iW, int iH)
 {
 	SDL_SetVideoMode(iW, iH, 0, SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
+
+    pLayout->WindowResized(iW, iH);
 	Redraw();
 }
 

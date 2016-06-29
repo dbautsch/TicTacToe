@@ -43,6 +43,8 @@ public:
 
 	void			SetGameState(unsigned uColumn, unsigned uRow, EPlayer playerState);
 
+    unsigned        Width();
+
 private:
 	unsigned		uWidth;
 

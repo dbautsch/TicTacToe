@@ -22,6 +22,8 @@ struct SDL_Surface;
 
 class Game;
 
+class RendererLayout;
+
 class Renderer
 {
 public:
@@ -40,6 +42,8 @@ private:
 
 	Game			*	pGame;
 
+    RendererLayout  *  pLayout;
+
 	ImageList			player1_Pictures;
 
 	ImageList			player2_Pictures;
@@ -53,7 +57,7 @@ private:
 
 	void				DrawGameBoard();
 
-	void				DrawBoardSkeleton();
+	void				DrawBoardSkeleton(unsigned uClientWidth, unsigned uClientHeight);
 
 	bool				LoadPictures();
 

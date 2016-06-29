@@ -208,6 +208,10 @@
 				RelativePath=".\Renderer.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\RendererLayout.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -252,6 +256,10 @@
 			</File>
 			<File
 				RelativePath=".\RendererDefs.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\RendererLayout.hpp"
 				>
 			</File>
 		</Filter>

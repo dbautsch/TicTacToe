@@ -105,3 +105,8 @@ void GameEngine::InitGame()
 		}
 	}
 }
+
+unsigned GameEngine::Width()
+{
+    return uWidth;
+}
