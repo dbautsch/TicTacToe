@@ -53,6 +53,8 @@ private:
 
 	void				DrawGameBoard();
 
+	void				DrawBoardSkeleton();
+
 	bool				LoadPictures();
 
 	void				UnloadPictures();

@@ -17,6 +17,8 @@
 
 #include "GameDefs.hpp"
 
+class GameEngine;
+
 class Renderer;
 
 class Game
@@ -31,7 +33,9 @@ public:
 private:
 	friend class Renderer;
 
-	Renderer		*	pRenderer;
+	Renderer		*	pRenderer;		//!<	renderer class responsible for drawing all visible items
+
+	GameEngine		*	pGameEngine;	//!<	an object for holding the game state
 
 	EGameBoard			state;
 

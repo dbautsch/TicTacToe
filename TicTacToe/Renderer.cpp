@@ -112,6 +112,14 @@ void Renderer::DrawGameBoard()
 
 	SDL_GetClipRect(pMainSurface, &rc);
 	SDL_FillRect(pMainSurface, &rc, SDL_MapRGB(pMainSurface->format, 128, 128, 128));
+
+	DrawBoardSkeleton();
+}
+
+void Renderer::DrawBoardSkeleton()
+{
+	//!<	draw board skeleton - a plece where X and O will be placed
+	//!<	during the match.
 }
 
 void Renderer::OnResize(int iW, int iH)
@@ -126,6 +134,8 @@ bool Renderer::LoadPictures()
 
 	for (int iPlayer = 1; iPlayer < 3; ++iPlayer)
 	{
+		ImageList * pImageList		= (iPlayer == 1) ? & player1_Pictures : & player2_Pictures;
+
 		for (int iPicture = 1; iPicture < 4; ++iPicture)
 		{
 			string strPicture		= "Images\\figure" + Helpers::ToString(iPlayer) + "-";
@@ -138,6 +148,9 @@ bool Renderer::LoadPictures()
 				MessageBoxA(0, (string("Failed to load file ") + strPicture).c_str(), "TicTacToe", MB_ICONERROR);
 				return false;
 			}
+
+			pImageList->push_back(NULL);
+			(*pImageList)[pImageList->size() - 1] = pImage;
 		}
 	}
 
@@ -146,5 +159,15 @@ bool Renderer::LoadPictures()
 
 void Renderer::UnloadPictures()
 {
-	UnloadPictures();
+	//!<	free all surfaces created during picture load operation
+
+	for (unsigned i = 0; i < player1_Pictures.size(); ++i)
+		SDL_FreeSurface(player1_Pictures[i]);
+
+	player1_Pictures.clear();
+
+	for (unsigned i = 0; i < player2_Pictures.size(); ++i)
+		SDL_FreeSurface(player2_Pictures[i]);
+
+	player2_Pictures.clear();
 }

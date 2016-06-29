@@ -12,6 +12,7 @@
 
 #include "Game.hpp"
 #include "Renderer.hpp"
+#include "GameEngine.hpp"
 
 #include <windows.h>
 #include <SDL_Events.h>
